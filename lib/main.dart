@@ -29,7 +29,6 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin{
 
   late AnimationController controller;
   late Animation<double> animation;
-  late Animation<double> animation2;
 
   @override
   void initState() {
@@ -38,17 +37,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin{
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-    ..addStatusListener((status) {
-      if(status == AnimationStatus.completed){
-        //animação completada
-        controller.reverse();
-      }else if( status == AnimationStatus.dismissed){
-        //animação resetada
-        controller.forward();
-      }
-    });
-    animation2 = Tween<double>(begin: 0, end: 150).animate(controller)
+    animation = CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn)
     ..addStatusListener((status) {
       if(status == AnimationStatus.completed){
         //animação completada
@@ -70,40 +59,20 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GrowTransition(child: const FlutterLogo(), animation: animation),
-        GrowTransition(child: const FlutterLogo(), animation: animation2),
-      ],
-    );
+    return GrowOpacityTransition(child: const FlutterLogo(), animation: animation);
   }
 
 }
 
-// class AnimatedLogo extends AnimatedWidget{
-//
-//   const AnimatedLogo(Animation<double> animation, {Key? key})
-//       : super(key: key, listenable: animation);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final Animation<double> animation = listenable as Animation<double>;
-//     return Center(
-//       child: SizedBox(
-//         height: animation.value,
-//         width: animation.value,
-//         child: const FlutterLogo(),
-//       ),
-//     );
-//   }
-//
-// }
 
-class GrowTransition extends StatelessWidget {
+class GrowOpacityTransition extends StatelessWidget {
   final Widget child;
   final Animation<double> animation;
 
-  const GrowTransition({Key? key, required this.child, required this.animation})
+  final sizeTween = Tween<double>(begin: 0, end: 300);
+  final opacityTween = Tween<double>(begin: 0.1, end: 1);
+
+  GrowOpacityTransition({Key? key, required this.child, required this.animation})
       : super(key: key);
 
   @override
@@ -112,10 +81,13 @@ class GrowTransition extends StatelessWidget {
       child: AnimatedBuilder(
         animation: animation,
         builder: (context, child) {
-          return SizedBox(
-            height: animation.value,
-            width: animation.value,
-            child: child,
+          return Opacity(
+            opacity: opacityTween.evaluate(animation).clamp(0, 1),
+            child: SizedBox(
+              height: sizeTween.evaluate(animation).clamp(0, 300),
+              width: sizeTween.evaluate(animation).clamp(0, 300),
+              child: child,
+            ),
           );
         },
         child: child,
