@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: LogoApp(),
     );
@@ -36,13 +37,16 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin{
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    animation = Tween<double>(begin: 0, end: 300).animate(controller);
-    animation.addListener(() {
-      setState(() {
-
-      });
+    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+    ..addStatusListener((status) {
+      if(status == AnimationStatus.completed){
+        //animação completada
+        controller.reverse();
+      }else if( status == AnimationStatus.dismissed){
+        //animação resetada
+        controller.forward();
+      }
     });
-
     controller.forward();
 
   }
@@ -55,6 +59,19 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    return AnimatedLogo(animation);
+  }
+
+}
+
+class AnimatedLogo extends AnimatedWidget{
+
+  const AnimatedLogo(Animation<double> animation, {Key? key})
+      : super(key: key, listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    final Animation<double> animation = listenable as Animation<double>;
     return Center(
       child: SizedBox(
         height: animation.value,
