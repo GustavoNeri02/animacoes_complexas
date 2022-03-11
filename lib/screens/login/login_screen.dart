@@ -1,4 +1,5 @@
 import 'package:animations/screens/login/widgets/form_container.dart';
+import 'package:animations/screens/login/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Stack(
               children: [
                 Column(
-                  children: [
+                  children: const [
                     Padding(
                       padding: EdgeInsets.only(top: 70, bottom: 32),
                       child: SizedBox(
@@ -37,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     FormContainer(),
+                    SignUpButton()
                   ],
                 )
               ],
