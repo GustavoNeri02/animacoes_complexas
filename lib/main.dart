@@ -1,5 +1,7 @@
+import 'package:animations/palette.dart';
 import 'package:animations/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,10 +12,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return NeumorphicApp(
       debugShowCheckedModeBanner: false,
       title: 'Animations',
-      home: LoginScreen(),
+      themeMode: ThemeMode.system,
+      theme: NeumorphicThemeData(
+        baseColor: Pallet().palette![0],
+          shadowLightColor: Colors.white,
+          lightSource: LightSource.topLeft,
+          iconTheme: IconThemeData(
+            color: Pallet().palette![1],
+          ),
+          depth: 10
+      ),
+      darkTheme: NeumorphicThemeData(
+          baseColor: Pallet().palette![1],
+          lightSource: LightSource.topLeft,
+          depth: 6
+      ),
+      home: const LoginScreen(),
     );
   }
 }

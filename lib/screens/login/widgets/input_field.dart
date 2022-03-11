@@ -1,4 +1,7 @@
+import 'package:animations/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputField extends StatelessWidget {
   final String hint;
@@ -13,30 +16,27 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.white24,
-            width: 0.5
-          )
-        )
-      ),
+    return Neumorphic(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        style: NeumorphicStyle(
+          depth: -5,
+          intensity: 1,
+          boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(50))),
+          oppositeShadowLightSource: false
+        ),
       child: TextFormField(
         obscureText: obscure,
         style: const TextStyle(
-          color: Colors.white,
         ),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
+          hintStyle: GoogleFonts.nunitoSans(
+            color: Pallet().palette![2],
+            fontWeight: FontWeight.w600
           ),
-          icon: Icon(icon, color: Colors.white,),
+          icon: Icon(icon, color: Pallet().palette![2],),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.only(
-              top: 30, right: 30, bottom: 30, left: 5),
         ),
       ),
     );

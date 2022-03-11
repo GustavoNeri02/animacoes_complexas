@@ -1,6 +1,9 @@
 import 'package:animations/screens/login/widgets/form_container.dart';
 import 'package:animations/screens/login/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,32 +16,46 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: NeumorphicAppBar(
+        actions: [
+          NeumorphicRadio(
+            child: Icon(
+              Icons.settings,
+              size: 40,
+            ),
+            style: NeumorphicRadioStyle(
+              shape: NeumorphicShape.flat,
+              boxShape: NeumorphicBoxShape.circle()
+            ),
+          ),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("images/background_full_size.jpg", ),
-            fit: BoxFit.cover,
-          )
+          // image: DecorationImage(
+          //   image: AssetImage("images/background_full_size.jpg", ),
+          //   fit: BoxFit.cover,
+          // )
         ),
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.symmetric(horizontal: 10),
           children: [
             Stack(
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 70, bottom: 32),
-                      child: SizedBox(
-                        height: 150,
-                        width: 150,
-                        child: CircleAvatar(
-                          child: Icon(Icons.person, size: 100,),
-                        ),
+                      padding: const EdgeInsets.symmetric(vertical: 170),
+                      child: Text("Sua Logo",
+                          style: GoogleFonts.nunito(
+                            color: const Color(0XFF323232),
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold
+                          )
                       ),
                     ),
-                    FormContainer(),
-                    SignUpButton()
+                    const FormContainer(),
+                    const SignUpButton()
                   ],
                 )
               ],
