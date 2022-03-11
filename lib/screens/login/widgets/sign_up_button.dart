@@ -1,3 +1,4 @@
+import 'package:animations/palette.dart';
 import 'package:flutter/material.dart';
 
 class SignUpButton extends StatelessWidget {
@@ -5,20 +6,30 @@ class SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.only(top: 160)
-      ),
-      child: const Text(
-        "Não possui uma conta? Cadastre-se!",
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            color: Colors.white,
-          fontWeight: FontWeight.w300,
-          letterSpacing: 0.5,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Não possui uma conta?",
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Pallet().palette![1],
+            letterSpacing: 0.5,
+          ),
         ),
-      ),
-      onPressed: (){},
+        GestureDetector(
+          child: Text(
+            " Cadastre-se!",
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Pallet().palette![1],
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5,
+            ),
+          ),
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

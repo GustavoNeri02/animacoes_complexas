@@ -11,15 +11,11 @@ class FormContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Form(
         child: Column(
-          children: [
-            const InputField(
-                  hint: "Username",
-                  obscure: false,
-                  icon: Icons.person_outline),
-            const InputField(
-                hint: "Password",
-                obscure: true,
-                icon: Icons.lock_outline),
+          children: const [
+            InputField(
+                hint: "Username", obscure: false, icon: Icons.person_outline),
+            InputField(
+                hint: "Password", obscure: true, icon: Icons.lock_outline),
           ],
         ),
       ),
