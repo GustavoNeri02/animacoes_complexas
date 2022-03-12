@@ -12,6 +12,7 @@ class FormContainer extends StatelessWidget {
         children: const [
           InputField(
               hint: "Username", obscure: false, icon: Icons.person_outline),
+          SizedBox(height: 20,),
           InputField(hint: "Password", obscure: true, icon: Icons.lock_outline),
         ],
       ),

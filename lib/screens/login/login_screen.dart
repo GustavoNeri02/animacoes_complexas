@@ -67,14 +67,61 @@ class _LoginScreenState extends State<LoginScreen>
               depth: 1.5,
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 20),
           const FormContainer(),
+          const SizedBox(height: 20),
           StaggerAnimation(controller: _animationController.view),
-          const SizedBox(
-            height: 16,
+          const SizedBox(height: 20),
+          Row(children: const [
+            Expanded(child: Divider(
+              indent: 5,
+              endIndent: 10,
+              thickness: 1,
+            )),
+            Text("ou"),
+            Expanded(child: Divider(
+              indent: 10,
+              endIndent: 5,
+              thickness: 1,
+            )),
+          ]),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              NeumorphicRadio(
+                child: const Icon(
+                  Icons.facebook,
+                  color: Colors.blue,
+                  size: 40,
+                ),
+                style: const NeumorphicRadioStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle()),
+              ),
+              NeumorphicRadio(
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.pink,
+                  size: 40,
+                ),
+                style: const NeumorphicRadioStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle()),
+              ),
+              NeumorphicRadio(
+                child: const Icon(
+                  Icons.email,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                style: const NeumorphicRadioStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle()),
+              ),
+            ],
           ),
+          const SizedBox(height: 20),
           const SignUpButton(),
         ],
       ),

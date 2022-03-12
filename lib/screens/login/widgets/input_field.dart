@@ -14,7 +14,6 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       style: NeumorphicStyle(
           depth: -5,
