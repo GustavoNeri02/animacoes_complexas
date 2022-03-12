@@ -1,5 +1,7 @@
+import 'package:animations/palette.dart';
 import 'package:animations/screens/login/widgets/form_container.dart';
 import 'package:animations/screens/login/widgets/sign_up_button.dart';
+import 'package:animations/screens/login/widgets/stagger_animation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,7 +12,23 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,36 +45,39 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
-      body: Container(
-          decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage("images/background_full_size.jpg", ),
-              //   fit: BoxFit.cover,
-              // )
-              ),
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            children: [
-              Stack(
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 50),
-                        child: Text("Sua Logo",
-                            style: GoogleFonts.nunito(
-                                color: const Color(0XFF323232),
-                                fontSize: 48,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      const FormContainer(),
-                      const SignUpButton(),
-                    ],
-                  )
-                ],
-              )
-            ],
-          )),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50),
+            child: Text("Sua Logo",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.nunito(
+                    color: Pallet().palette![1],
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold)),
+          ),
+          NeumorphicIcon(
+            Icons.home,
+            size: 80,
+            duration: const Duration(seconds: 2),
+            curve: Curves.elasticInOut,
+            style: const NeumorphicStyle(
+              depth: 1.5,
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const FormContainer(),
+          StaggerAnimation(controller: _animationController.view),
+          const SizedBox(
+            height: 16,
+          ),
+          const SignUpButton(),
+        ],
+      ),
     );
   }
 }
