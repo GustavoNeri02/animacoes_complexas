@@ -119,6 +119,16 @@ class _LoginScreenState extends State<LoginScreen>
                     shape: NeumorphicShape.flat,
                     boxShape: NeumorphicBoxShape.circle()),
               ),
+              NeumorphicRadio(
+                child: const Icon(
+                  Icons.apple,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                style: const NeumorphicRadioStyle(
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.circle()),
+              ),
             ],
           ),
           const SizedBox(height: 20),
