@@ -1,8 +1,10 @@
 import 'package:animations/palette.dart';
 import 'package:animations/screens/login/widgets/form_container.dart';
+import 'package:animations/screens/login/widgets/other_login_option_button.dart';
 import 'package:animations/screens/login/widgets/sign_up_button.dart';
 import 'package:animations/screens/login/widgets/stagger_animation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -88,47 +90,11 @@ class _LoginScreenState extends State<LoginScreen>
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              NeumorphicRadio(
-                child: const Icon(
-                  Icons.facebook,
-                  color: Colors.blue,
-                  size: 40,
-                ),
-                style: const NeumorphicRadioStyle(
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.circle()),
-              ),
-              NeumorphicRadio(
-                child: const Icon(
-                  Icons.camera_alt,
-                  color: Colors.pink,
-                  size: 40,
-                ),
-                style: const NeumorphicRadioStyle(
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.circle()),
-              ),
-              NeumorphicRadio(
-                child: const Icon(
-                  Icons.email,
-                  color: Colors.red,
-                  size: 40,
-                ),
-                style: const NeumorphicRadioStyle(
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.circle()),
-              ),
-              NeumorphicRadio(
-                child: const Icon(
-                  Icons.apple,
-                  color: Colors.black,
-                  size: 40,
-                ),
-                style: const NeumorphicRadioStyle(
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.circle()),
-              ),
+            children: const [
+              OtherLoginOptionButton(path: "images/google_logo.jpg", color: Colors.red),
+              OtherLoginOptionButton(icon: FontAwesomeIcons.facebookF, color: Colors.blueAccent),
+              OtherLoginOptionButton(icon: FontAwesomeIcons.linkedinIn, color: Colors.blueAccent),
+
             ],
           ),
           const SizedBox(height: 20),
